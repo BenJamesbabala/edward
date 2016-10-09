@@ -41,17 +41,9 @@ def multinomial_logpmf_vec(x, n, p):
 class test_gamma_logpdf_class(tf.test.TestCase):
 
   def _test(self, x, n, p):
-    xtf = tf.constant(x)
     val_true = multinomial_logpmf_vec(x, n, p)
     with self.test_session():
-      self.assertAllClose(multinomial.logpmf(xtf, n, p).eval(), val_true)
-      self.assertAllClose(
-          multinomial.logpmf(xtf, n, tf.constant(p, dtype=tf.float32)).eval(),
-          val_true)
-      self.assertAllClose(multinomial.logpmf(xtf, n, p).eval(), val_true)
-      self.assertAllClose(
-          multinomial.logpmf(xtf, n, tf.constant(p, dtype=tf.float32)).eval(),
-          val_true)
+      self.assertAllClose(multinomial.logpmf(x, n=n, p=p).eval(), val_true)
 
   def test_int_1d(self):
     self._test(np.array([0, 1]), 1, np.array([0.5, 0.5]))

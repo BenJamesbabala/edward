@@ -63,14 +63,7 @@ class test_multinomial_entropy_class(tf.test.TestCase):
   def _test(self, n, p):
     val_true = multinomial_entropy_vec(n, p)
     with self.test_session():
-      self.assertAllClose(multinomial.entropy(n, p).eval(), val_true)
-      self.assertAllClose(
-          multinomial.entropy(n, tf.constant(p, dtype=tf.float32)).eval(),
-          val_true)
-      self.assertAllClose(multinomial.entropy(n, p).eval(), val_true)
-      self.assertAllClose(
-          multinomial.entropy(n, tf.constant(p, dtype=tf.float32)).eval(),
-          val_true)
+      self.assertAllClose(multinomial.entropy(n=n, p=p).eval(), val_true)
 
   def test_1d(self):
     self._test(1, np.array([0.5, 0.5]))
